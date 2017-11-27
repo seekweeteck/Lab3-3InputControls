@@ -1,26 +1,17 @@
 package com.example.taruc.lab3_3inputcontrols;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.Context;
-import android.support.v4.app.DialogFragment;
 import android.content.Intent;
-import java.util.Calendar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity implements Spinner.OnItemSelectedListener, DatePickerFragment.OnDateSelectedListener {
@@ -49,9 +40,7 @@ public class MainActivity extends AppCompatActivity implements Spinner.OnItemSel
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.salary, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSalary.setAdapter(adapter);
-        //buttonDisplay = (Button) findViewById(R.id.button_register);
-        //buttonSelectDate = (Button) findViewById(R.id.buttonSelectDate);
-        //toggleOnOff = (ToggleButton) findViewById(R.id.toggleButtonOnOff);
+
     }
 
     public void showMessage(View view){
@@ -62,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements Spinner.OnItemSel
         // find the radio button by returned id
         radioSexButton = (RadioButton) findViewById(selectedId);
 
-        // Toast.makeText(this,radioSexButton.getText().toString(), Toast.LENGTH_SHORT).show();
 
         String message = "User Name: " + editTextName.getText().toString() +
                 "\nUser Phone: " + editTextPhone.getText().toString()+
@@ -112,31 +100,4 @@ public class MainActivity extends AppCompatActivity implements Spinner.OnItemSel
         editTextDate.setText(month + "/" + day + "/" + year);
     }
 
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
-
-        // Container Activity must implement this interface
-        public interface OnDateSelectedListener {
-            public void populateSetDate( int year, int month, int dayOfMonth);
-        }
-
-        private int day, month, year;
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current time as the default values for the picker
-            final Calendar calendar = Calendar.getInstance();
-            int yy = calendar.get(Calendar.YEAR);
-            int mm = calendar.get(Calendar.MONTH);
-            int dd = calendar.get(Calendar.DAY_OF_MONTH);
-            return new DatePickerDialog(getActivity(), this, yy, mm, dd);
-        }
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            this.year = year;
-            this.month=  month+ 1;
-            this.day = dayOfMonth;
-        }
-    }
 }
